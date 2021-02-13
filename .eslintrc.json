@@ -29,6 +29,8 @@
       "react-hooks/exhaustive-deps": "warn",
       "prettier/prettier": "error",
       "import/prefer-default-export": "off",
+      "react/prop-types": "off",
+      "jsx-a11y/control-has-associated-label": "off",
       "react/jsx-filename-extension": [
         1,
         {

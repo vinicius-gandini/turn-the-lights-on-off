@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
         <Build>
           {windows.map(window => (
-            <Window key={window} />
+            <Window key={window} onClick={() => console.log(window)} />
           ))}
         </Build>
       </Container>
