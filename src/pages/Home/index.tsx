@@ -2,9 +2,10 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { isAfter, isBefore } from 'date-fns';
+import { Switch } from '@material-ui/core';
 import Window from '../../components/Window';
 
-import { Container, Title, Build } from './styles';
+import { Container, Title, Build, BuildContent } from './styles';
 
 import { theme } from '../../styles/colors';
 
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
   const [sunrise, setSunrise] = useState(new Date());
   const [sunset, setSunset] = useState(new Date());
   const [isDay, setIsDay] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const [selectedWindows, setSelectedWindows] = useState<number[]>([]);
 
@@ -33,6 +35,16 @@ const Home: React.FC = () => {
     },
     [selectedWindows],
   );
+
+  const handleSwitchChange = useCallback(() => {
+    if (checked) {
+      setSelectedWindows([]);
+      setChecked(false);
+    } else {
+      setSelectedWindows(windows);
+      setChecked(true);
+    }
+  }, [windows, checked]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -68,15 +80,23 @@ const Home: React.FC = () => {
       <Container isDay={isDay}>
         <Title>Turn the lights ON/OFF</Title>
 
-        <Build>
-          {windows.map(window => (
-            <Window
-              key={window}
-              onClick={() => handleTurnTheLight(window)}
-              selected={!!selectedWindows.includes(window)}
-            />
-          ))}
-        </Build>
+        <BuildContent>
+          <Build>
+            {windows.map(window => (
+              <Window
+                key={window}
+                onClick={() => handleTurnTheLight(window)}
+                selected={!!selectedWindows.includes(window)}
+              />
+            ))}
+          </Build>
+
+          <Switch
+            checked={checked}
+            onChange={handleSwitchChange}
+            color="primary"
+          />
+        </BuildContent>
       </Container>
     </ThemeProvider>
   );

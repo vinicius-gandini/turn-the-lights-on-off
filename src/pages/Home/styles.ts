@@ -22,7 +22,8 @@ export const Container = styled.div<ContainerProps>`
               ${colors => colors.theme.backLightSecundary} 18%,
               ${colors => colors.theme.backLightPrimary} 100%
             );
-          color: #000;
+          color: #333533;
+          text-shadow: 1px 1px 1px #000;
         `
       : css`
           background-image: url(${moonImg}),
@@ -37,7 +38,6 @@ export const Container = styled.div<ContainerProps>`
   background-repeat: no-repeat, repeat;
   background-position: 100% 0%;
   background-size: 240px;
-  background-color: rgb(248, 249, 249);
 `;
 
 export const Title = styled.h1`
@@ -47,16 +47,26 @@ export const Title = styled.h1`
 `;
 
 export const Build = styled.div`
-  background: #dee2e6;
-  width: 420px;
+  width: 100%;
   height: 100%;
-  border-radius: 8px 8px 0 0;
-  padding: 24px;
-  box-shadow: 1px 1px 8px 1px #1b1f22;
 
   display: grid;
   place-items: center;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
   grid-template-columns: repeat(3, 1fr);
+`;
+
+export const BuildContent = styled.div`
+  background: #fbfbf2;
+  width: 420px;
+  height: 100%;
+  border-radius: 8px 8px 0 0;
+  padding: 24px;
+  box-shadow: 1px 1px 8px 1px #1b1f22;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

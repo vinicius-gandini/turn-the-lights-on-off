@@ -7,9 +7,9 @@ interface WindowProps {
 export const Container = styled.div<WindowProps>`
   width: 60px;
   height: 60px;
-  background: #adb5bd;
+  background: #e5e6e4;
   border-radius: 8px;
-  box-shadow: inset 0px 0px 4px #64707d;
+  box-shadow: inset 0px 0px 4px #b8bab5;
   transition: background-color 0.5s;
 
   ${props =>
