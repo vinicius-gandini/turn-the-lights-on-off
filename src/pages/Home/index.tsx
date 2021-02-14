@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import axios from 'axios';
 import { isAfter, isBefore } from 'date-fns';
@@ -9,10 +9,30 @@ import { Container, Title, Build } from './styles';
 import { theme } from '../../styles/colors';
 
 const Home: React.FC = () => {
-  const windows = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const windows = useMemo(() => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], []);
+
   const [sunrise, setSunrise] = useState(new Date());
   const [sunset, setSunset] = useState(new Date());
   const [isDay, setIsDay] = useState(true);
+
+  const [selectedWindows, setSelectedWindows] = useState<number[]>([]);
+
+  const handleTurnTheLight = useCallback(
+    (window: number) => {
+      const alreadySelected = selectedWindows.findIndex(
+        item => item === window,
+      );
+
+      if (alreadySelected >= 0) {
+        const filteredItems = selectedWindows.filter(item => item !== window);
+
+        setSelectedWindows(filteredItems);
+      } else {
+        setSelectedWindows([...selectedWindows, window]);
+      }
+    },
+    [selectedWindows],
+  );
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
@@ -50,7 +70,11 @@ const Home: React.FC = () => {
 
         <Build>
           {windows.map(window => (
-            <Window key={window} onClick={() => console.log(window)} />
+            <Window
+              key={window}
+              onClick={() => handleTurnTheLight(window)}
+              selected={!!selectedWindows.includes(window)}
+            />
           ))}
         </Build>
       </Container>
