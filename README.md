@@ -2,6 +2,14 @@
 
 Clique nas janelas para acender ou apagar a luz, ou aperte o interruptor para acender/apagar todas de uma vez.
 
+Para iniciar, clone o repositório e no terminal execute o comando para baixar as dependências:
+
+    yarn
+
+Após, rode a aplicação com 
+
+    yarn start
+
 ## Aplicação desenvolvida com:
 
 - ReactJS
