@@ -78,7 +78,7 @@ const Home: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <Container isDay={isDay}>
-        <Title>Turn the lights ON/OFF</Title>
+        <Title>Lights ON/OFF</Title>
 
         <BuildContent>
           <Build>
